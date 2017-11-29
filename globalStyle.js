@@ -21,4 +21,10 @@ export default `
   .wt {
     color: white !important;
   }
+
+  .product_page {
+    padding: 10px 10px;
+    background: #f5f5f5;
+    min-height: 500px;
+  }
 `
