@@ -13,4 +13,12 @@ export default `
     max-width: 1024px;
     margin: auto;
   }
+
+  .ct {
+    text-align: center;
+  }
+
+  .wt {
+    color: white !important;
+  }
 `

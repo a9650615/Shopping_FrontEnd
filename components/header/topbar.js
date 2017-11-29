@@ -33,6 +33,10 @@ export default () => (
         padding: 0 1rem;
       }
 
+      .topbar_nav_a:first-child {
+        padding-left: 0;
+      }
+
       .splits_separator {
         padding: 0;
         height: 1.3rem;
