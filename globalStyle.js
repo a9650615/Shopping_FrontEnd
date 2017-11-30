@@ -1,6 +1,13 @@
 export default `
+  html, body, body>div:first-child, #__next, div[data-reactroot], .fullheight {
+    min-height: 100% !important;
+    height: 100%;
+  }
+
   body {
     margin: 0;
+    height: 100%;
+    min-height: 100%;
   }
 
   a {

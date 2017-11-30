@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import Head from './head'
 import Header from './header'
+import Footer from './footer'
 
 class Wrapper extends React.Component {
   render() {
@@ -12,6 +13,7 @@ class Wrapper extends React.Component {
         <div className="product_page">
           {this.props.child}
         </div>
+        <Footer />
         <style jsx>{`
           .header-top {
             background: #f74d18;

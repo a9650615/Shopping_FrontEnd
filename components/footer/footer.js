@@ -9,6 +9,8 @@ export default () => (
         border-top: 1px solid rgba(0,0,0,.12);
         line-height: 1.2;
         padding: 2rem 0;
+        background: white;
+        color: black;
       }
     `}</style>
   </div>

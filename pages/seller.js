@@ -2,6 +2,8 @@ import React from 'react'
 import { bindActionCreators } from 'redux'
 import { initStore, startClock, addCount, serverRenderClock } from '../store'
 import withRedux from 'next-redux-wrapper'
+import Wrapper from '../components/seller/wrapper'
+import Index from '../container/seller'
 
 class Counter extends React.Component {
   static getInitialProps ({ store, isServer }) {
@@ -17,7 +19,9 @@ class Counter extends React.Component {
 
   render () {
     return (
-      <div>other</div>
+      <Wrapper>
+        <Index />
+      </Wrapper>
     )
   }
 }

@@ -1,11 +1,11 @@
 import React from 'react'
 import Document, { Head, Main, NextScript } from 'next/document'
-import Footer from '../components/footer'
+import Style from '../globalStyle'
 
 class MyDocument extends Document {
   render() {
     return (
-      <html lang="en" dir="ltr">
+      <html lang="zh-Hant-TW" dir="ltr">
         <Head>
           <title>My page</title>
           <meta charSet="utf-8" />
@@ -30,11 +30,11 @@ class MyDocument extends Document {
             rel="stylesheet"
             href="https://fonts.googleapis.com/css?family=Roboto:300,400,500"
           />
+          <style global jsx>{Style}</style>
         </Head>
         <body>
           <Main />
           <NextScript />
-          <Footer />
         </body>
       </html>
     );
