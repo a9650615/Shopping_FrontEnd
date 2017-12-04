@@ -1,5 +1,6 @@
 import Link from  'next/link'
 import Grid from 'material-ui/Grid'
+import LoginRegister from '../../container/header/LoginRegister'
 
 export default () => (
   <Grid container spacing={12} className="max_size">
@@ -19,9 +20,7 @@ export default () => (
         <Link href="#">
           <a className="topbar_nav_a">幫助中心</a>
         </Link>
-        <a className="topbar_nav_a">註冊</a>
-        <span className="splits_separator"></span>
-        <a className="topbar_nav_a">登入</a>
+        <LoginRegister />
       </div>
     </Grid>
     <style jsx>{`
@@ -35,12 +34,6 @@ export default () => (
 
       .topbar_nav_a:first-child {
         padding-left: 0;
-      }
-
-      .splits_separator {
-        padding: 0;
-        height: 1.3rem;
-        border-right: 1px solid hsla(0,0%,100%,.4);
       }
 
       .right-side {

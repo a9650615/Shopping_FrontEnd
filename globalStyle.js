@@ -34,4 +34,12 @@ export default `
     background: #f5f5f5;
     min-height: 500px;
   }
+
+  .solid--primary {
+    background: #ff5722;
+  }
+
+  button {
+    outline: none;
+  }
 `
