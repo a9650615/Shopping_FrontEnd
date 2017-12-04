@@ -6,7 +6,7 @@ import Wrapper from '../components/seller/wrapper'
 import Index from '../container/seller'
 
 class Counter extends React.Component {
-  static getInitialProps ({ store, isServer }) {
+  static getInitialProps ({ query, store, isServer }) {
     
     return { }
   }
@@ -18,9 +18,17 @@ class Counter extends React.Component {
   }
 
   render () {
+    let page
+    switch(this.props.url.query.page) {
+      case 'product': 
+        page = <div></div>;
+        break;
+      default:
+        page = (<Index />)
+    }
     return (
       <Wrapper>
-        <Index />
+        {page}
       </Wrapper>
     )
   }

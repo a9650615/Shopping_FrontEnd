@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import Grid from 'material-ui/Grid'
 import Typography from 'material-ui/Typography'
 import Avatar from 'material-ui/Avatar'
@@ -11,7 +12,9 @@ let Header = (props) => {
           <Grid item sm={7}>
             <div className="title">
               <Typography type="title" style={{color: 'white', fontWeight: '100'}}>
-                熊讚賣家中心
+                <Link href="/seller">
+                  <a href="/seller">熊讚賣家中心</a>
+                </Link>
               </Typography>
             </div>
           </Grid>
@@ -20,7 +23,7 @@ let Header = (props) => {
               <Grid item style={{padding: 0}}>
                 <div className="select-item">
                   <div className="account">
-                    <Avatar src="static/image/default-avatar.png" style={{width: 25, height: 25, display: 'inline-block'}}/>
+                    <Avatar src="/static/image/default-avatar.png" style={{width: 25, height: 25, display: 'inline-block'}}/>
                     <span className="account-name">test</span>
                   </div>
                 </div>
