@@ -23,6 +23,13 @@ class LoginRegister extends React.Component {
     type: 0
   }
 
+  componentWillMount() {
+    if (localStorage) {
+      let user = JSON.parse(localStorage.getItem('user'))
+      this.props.user.SaveUser(user)
+    }
+  }
+
   openDialog(type) {
     this.setState({
       type
@@ -36,9 +43,9 @@ class LoginRegister extends React.Component {
 
     new Fetch(text[this.state.type].url, 'POST', text[this.state.type].data)
       .then(((data) => {
-        console.log(this.props)
         if (data.status) {
           this.props.user.SaveUser(data)
+          localStorage.setItem('user', JSON.stringify(data))
         } else {
 
         }
