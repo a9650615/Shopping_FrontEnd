@@ -1,6 +1,9 @@
 import React from 'react'
 import Dialog, { DialogTitle, DialogContent, DialogActions } from 'material-ui/Dialog'
 import Fetch from '../../model/fetch'
+import { connect } from 'react-redux'
+import {bindActionCreators} from 'redux'
+import User from '../../reducer/User'
 
 let text = [
   {},
@@ -15,7 +18,7 @@ let text = [
     password: ''
   }}
 ]
-export default class LoginRegister extends React.Component {
+class LoginRegister extends React.Component {
   state = {
     type: 0
   }
@@ -32,13 +35,14 @@ export default class LoginRegister extends React.Component {
     }
 
     new Fetch(text[this.state.type].url, 'POST', text[this.state.type].data)
-      .then((data) => {
+      .then(((data) => {
+        console.log(this.props)
         if (data.status) {
-
+          this.props.user.SaveUser(data)
         } else {
 
         }
-      })
+      }).bind(this))
   }
   
   render() {
@@ -163,3 +167,11 @@ export default class LoginRegister extends React.Component {
     )
   }
 }
+
+let mapActionToProp = (dispatch) => {
+  return {
+    user: bindActionCreators(User, dispatch)
+  }
+}
+
+export default connect(state => state, mapActionToProp)(LoginRegister)

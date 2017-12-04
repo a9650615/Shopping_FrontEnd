@@ -5,17 +5,27 @@ import thunkMiddleware from 'redux-thunk'
 const exampleInitialState = {
   // lastUpdate: 0,
   // light: false,
-  // count: 0
+  // count: 0,
+  user: {
+    name: '',
+    id: null,
+    account: '',
+    info: ''
+  }
 }
 
 export const actionTypes = {
   // ADD: 'ADD',
-  // TICK: 'TICK'
+  // TICK: 'TICK',
+  USER_SAVE: 'USER_SAVE'
 }
 
 // REDUCERS
 export const reducer = (state = exampleInitialState, action) => {
   switch (action.type) {
+    case actionTypes.USER_SAVE:
+      return Object.assign({}, state, {user: action.user})
+      break;
     // case actionTypes.TICK:
     //   return Object.assign({}, state, { lastUpdate: action.ts, light: !!action.light })
     // case actionTypes.ADD:
