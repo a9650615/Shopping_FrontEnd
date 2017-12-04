@@ -4,6 +4,7 @@ import { initStore, startClock, addCount, serverRenderClock } from '../store'
 import withRedux from 'next-redux-wrapper'
 import Wrapper from '../components/seller/wrapper'
 import Index from '../container/seller'
+import AddProduct from '../container/seller/addProduct'
 
 class Counter extends React.Component {
   static getInitialProps ({ query, store, isServer }) {
@@ -20,8 +21,8 @@ class Counter extends React.Component {
   render () {
     let page
     switch(this.props.url.query.page) {
-      case 'product': 
-        page = <div></div>;
+      case 'addproduct': 
+        page = <AddProduct />;
         break;
       default:
         page = (<Index />)

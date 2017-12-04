@@ -10,7 +10,7 @@ export default class Fetch {
         'Accept': 'application/json, application/xml, text/plain, text/html, *.*',
         'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8'
       },
-      body: form.join('&')
+      body: method!='GET'?form.join('&'): null
     })
     .then(response => {
       if (response.status === 200) {

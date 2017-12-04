@@ -11,13 +11,16 @@ class Wrapper extends React.Component {
         <Head />
         <Header />
         <div className="product_page">
-          {this.props.child}
+          {this.props.children}
         </div>
         <Footer />
         <style jsx>{`
           .header-top {
             background: #f74d18;
             color: #fff;
+          }
+          .product_page {
+            color: black;
           }
         `}</style>
       </div>
