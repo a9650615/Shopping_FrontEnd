@@ -4,6 +4,10 @@ import Fetch from '../../model/fetch'
 import { connect } from 'react-redux'
 import {bindActionCreators} from 'redux'
 import User from '../../reducer/User'
+import { Avatar } from 'material-ui'
+import Popover from 'material-ui/Popover'
+import Menu, { MenuItem } from 'material-ui/Menu'
+import Router from 'next/router'
 
 let text = [
   {},
@@ -20,7 +24,8 @@ let text = [
 ]
 class LoginRegister extends React.Component {
   state = {
-    type: 0
+    type: 0,
+    menuOpen: false
   }
 
   componentWillMount() {
@@ -46,18 +51,63 @@ class LoginRegister extends React.Component {
         if (data.status) {
           this.props.user.SaveUser(data)
           localStorage.setItem('user', JSON.stringify(data))
+          this.setState({
+            type: 0
+          })
         } else {
 
         }
       }).bind(this))
   }
+
+  hover(state) {
+    this.setState({
+      menuOpen: state
+    })
+  }
+
+  goTo(page) {
+    if (page != 'logout')
+      Router.push({pathname: page})
+    else
+    {
+      localStorage.setItem('user', JSON.stringify({}))
+      this.props.user.SaveUser({id: null})
+    }
+    this.setState({
+      menuOpen: false
+    })
+  }
   
   render() {
+    console.log(this.props)
     return (
       <div className="wrapper">
-        <a className="topbar_nav_a" onClick={this.openDialog.bind(this, 1)}>註冊</a>
-        <span className="splits_separator"></span>
-        <a className="topbar_nav_a" onClick={this.openDialog.bind(this, 2)}>登入</a>
+        {
+          this.props.state.user.id &&
+          <div className="topbar_nav_a" style={{display: 'inline-block', marginTop: 0}}
+            onMouseOver={this.hover.bind(this, true)}
+            ref={(inp) => this.over = inp}
+          >
+            <div style={{justifyContent: 'center', display: 'flex', padding: '0.7rem'}}>
+              <span><Avatar style={{width: 20, height: 20}} src="/static/image/default-avatar.png"/></span>
+              <a className="topbar_nav_a" style={{padding: '0 2px'}}>{this.props.state.user.name}</a>
+            </div>
+            <Menu open={this.state.menuOpen} anchorEl={this.over} onRequestClose={this.hover.bind(this, false)}>
+              <MenuItem onClick={this.goTo.bind(this, '/cart')}>購買清單</MenuItem>
+              <MenuItem onClick={this.goTo.bind(this, '/user')}>我的帳號</MenuItem>
+              <MenuItem onClick={this.goTo.bind(this, 'logout')}>登出</MenuItem>
+            </Menu>
+          </div>
+        }
+        {
+          !this.props.state.user.id &&
+          <div style={{marginTop: '10px'}}>
+            <a className="topbar_nav_a" onClick={this.openDialog.bind(this, 1)}>註冊</a>
+            <span className="splits_separator"></span>
+            <a className="topbar_nav_a" onClick={this.openDialog.bind(this, 2)}>登入</a>
+          </div>
+        }
         <Dialog
           open={this.state.type>0}
         >
@@ -181,4 +231,10 @@ let mapActionToProp = (dispatch) => {
   }
 }
 
-export default connect(state => state, mapActionToProp)(LoginRegister)
+let mapStateToProp = (state) => {
+  return {
+    state: state
+  }
+}
+
+export default connect(mapStateToProp, mapActionToProp)(LoginRegister)

@@ -30,6 +30,7 @@ export default () => (
         line-height: 2.8rem;
         display: inline-block;
         padding: 0 1rem;
+        vertical-align: top;
       }
 
       .topbar_nav_a:first-child {
