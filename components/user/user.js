@@ -1,14 +1,28 @@
 import React from 'react'
 import Avatar from 'material-ui/Avatar'
+import Fetch from '../../model/fetch'
+
 export default class User extends React.Component {
+  state = {
+    name: '',
+    text: ''
+  }
+
+  componentDidMount() {
+    new Fetch(`/user/id/${this.props.id}`)
+      .then((data) => {
+        this.setState(data)
+      })
+  }
   render() {
     return (
       <div className="product-info">
         <div className="flex">
           <Avatar style={{width: 60, height: 60}} src="/static/image/default-avatar.png" />
           <div className="info">
-            <div>UserName</div>
+            <div>{this.state.name}</div>
           </div>
+          <div className="info">{this.state.text}</div>
         </div>
         <style>{`
           .flex {

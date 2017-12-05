@@ -1,5 +1,5 @@
 export default class Fetch {
-  constructor(url, method, data) {
+  constructor(url, method = 'GET', data = {}) {
     let form = []
     for (let key in data) {
       form.push(`${key}=${data[key]}`)

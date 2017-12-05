@@ -7,15 +7,13 @@ export default class Seller extends React.Component {
     return (
       <div>
         <Link href={`/user/${1}`}>
-          <a href={`/user/${1}`}>
-            <div className="flex">
-              <Avatar style={{width: 60, height: 60}} src="/static/image/default-avatar.png" />
-              <div className="info">
-                <div>UserName</div>
-                <Link href={`/user/${1}`}><a href={`/user/${1}`}><button className="shopee-button-outline ">查看賣場</button></a></Link>
-              </div>
+          <div className="flex">
+            <Avatar style={{width: 60, height: 60}} src="/static/image/default-avatar.png" />
+            <div className="info">
+              <div>{this.props.user.name}</div>
+              <Link href={`/user/${1}`}><a href={`/user/${1}`}><button className="shopee-button-outline ">查看賣場</button></a></Link>
             </div>
-          </a>
+          </div>
         </Link>
         <style jsx>{`
           .flex {

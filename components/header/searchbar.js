@@ -2,12 +2,13 @@ import Grid from 'material-ui/Grid'
 import Typography from 'material-ui/Typography'
 import Button from 'material-ui/Button'
 import IconButton from 'material-ui/IconButton'
+import Link from 'next/link'
 export default () => (
   <div className="header_search">
     <Grid container spacing={12} className="max_size">
       <Grid item sm={2}>
         <Typography type="display1" gutterBottom className="wt">
-          熊讚購物
+          <Link href="/"><a href="/">熊讚購物</a></Link>
         </Typography>
       </Grid>
       <Grid item sm={8}>

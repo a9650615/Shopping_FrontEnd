@@ -2,8 +2,34 @@ import React from 'react'
 import Grid from 'material-ui/Grid'
 import Seller from './seller'
 import Tabs, { Tab } from 'material-ui/Tabs'
+import Fetch from '../../model/fetch'
+
+let pattern = new RegExp(/\[(.*)\]/,'ig')
 
 class Index extends React.Component {
+  state = {
+    amount: 0,
+    content: '',
+    id: 0,
+    name: '',
+    price: 0,
+    user_ID: 0,
+    user: {}
+  }
+
+  componentDidMount() {
+    new Fetch(`/product/${this.props.id}`)
+      .then((data) => {
+        this.setState(data.product)
+        new Fetch(`/user/id/${data.product.user_ID}`)
+          .then((data) => {
+            this.setState({
+              user: data
+            })
+          })
+      })
+  }
+
   render() {
     return (
       <div className="max_size">
@@ -20,17 +46,17 @@ class Index extends React.Component {
           </Grid>
           <Grid item xs={12} sm={8}>
             <div className="product-info">
-              <h1 className="title">技嘉Gigabyte RX480 4gb 顯示卡 遊戲卡 吃雞參考</h1>
-              <div className="price">${123}</div>
+              <h1 className="title">{this.state.name}</h1>
+              <div className="price">${this.state.price}</div>
               <div className="rating">尚未有評價</div>
               <div className="product-selecter">
                 <div className="num-info">數量：</div>
-                <div class="selecter">
+                <div className="selecter">
                   <button className="shopee-button-outline"><svg enableBackground="new 0 0 10 10" viewBox="0 0 10 10" x="0" y="0"><polygon points="4.5 4.5 3.5 4.5 0 4.5 0 5.5 3.5 5.5 4.5 5.5 10 5.5 10 4.5"></polygon></svg></button>
                   <input type="text" className="shopee-button-outline shopee-button-outline-mid" value="1" readOnly />
                   <button className="shopee-button-outline"><svg enableBackground="new 0 0 10 10" viewBox="0 0 10 10" x="0" y="0"><polygon points="10 4.5 5.5 4.5 5.5 0 4.5 0 4.5 4.5 0 4.5 0 5.5 4.5 5.5 4.5 10 5.5 10 5.5 5.5 10 5.5"></polygon></svg></button>
                 </div>
-                <span className="num-info">還剩{0}件</span>
+                <span className="num-info">還剩{this.state.amount}件</span>
               </div>
             </div>
             <div className="shopee-guarantee">
@@ -40,7 +66,7 @@ class Index extends React.Component {
           </Grid>
         </Grid>
         <div className="product-info user-block">
-          <Seller />
+          <Seller user={this.state.user} />
         </div>
         <br />
         <div className="product-info user-block">
@@ -54,7 +80,7 @@ class Index extends React.Component {
             <Tab label="商品留言"></Tab>
           </Tabs>
           <div className="product-info">
-            這是一個商品說明
+            {this.state.content.replace(pattern, '')}
           </div>
         </div>
         <style>{`

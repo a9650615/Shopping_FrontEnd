@@ -18,13 +18,19 @@ class UserPage extends React.Component {
   }
 
   render () {
-    let page
+    let user = this.props.url.query.id || this.props.user.id
     
     return (
       <Wrapper>
-        <User />
+        <User id={user}/>
       </Wrapper>
     )
+  }
+}
+
+const mapUserToProps = (state) => {
+  return {
+    user: state.user
   }
 }
 
@@ -33,4 +39,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default withRedux(initStore, null, mapDispatchToProps)(UserPage)
+export default withRedux(initStore, mapUserToProps, mapDispatchToProps)(UserPage)

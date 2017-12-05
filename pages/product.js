@@ -12,6 +12,7 @@ class Counter extends React.Component {
   }
 
   componentDidMount () {
+
   }
 
   componentWillUnmount () {
@@ -22,7 +23,7 @@ class Counter extends React.Component {
     
     return (
       <Wrapper>
-        <Index />
+        <Index id={this.props.url.query.id}/>
       </Wrapper>
     )
   }
