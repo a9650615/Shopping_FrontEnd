@@ -15,14 +15,24 @@ class Index extends React.Component {
     price: 0,
     user_ID: 0,
     user: {},
-    select: 1
+    select: 1,
+    img: []
+  }
+
+  getImgUrl(str = '') {
+    return str.replace('[','').replace(']','')
   }
 
   componentDidMount() {
     new Fetch(`/product/id/${this.props.id}`)
       .then((data) => {
+        data.product.img = []
+        data.product.content.match(pattern).forEach((val) => {
+          data.product.img.push(this.getImgUrl(val))
+        })
+        console.log(data.product)
         this.setState(data.product)
-        new Fetch(`/user/id/${data.product.user_ID}`)
+        new Fetch(`/user/${data.product.user_id}`)
           .then((data) => {
             this.setState({
               user: data
@@ -65,7 +75,7 @@ class Index extends React.Component {
         <Grid container>
           <Grid item xs={12} sm={4}>
             <div className="image-container">
-              <img src={`https://cfshopeetw-a.akamaihd.net/file/6f4b0ac9489b4e75c4c948052bcfcc6a_tn`} alt=""/>
+              <img src={this.state.img[0]} alt=""/>
             </div>
             <div className="image-list">
               <img src={`https://cfshopeetw-a.akamaihd.net/file/6f4b0ac9489b4e75c4c948052bcfcc6a_tn`} alt=""/>
@@ -243,8 +253,11 @@ class Index extends React.Component {
             position: relative;
           }
           .image-container img {
+            vertical-align: center;
             width: auto;
             height: auto;
+            max-width: 100%;
+            max-height: 100%;
           }
           .image-list img {
             width: 70px;

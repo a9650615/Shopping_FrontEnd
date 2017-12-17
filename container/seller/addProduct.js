@@ -11,7 +11,7 @@ let formData = {
   name: '',
   content: '',
   is_discount: 0,
-  member_id: 0
+  user_id: 0
 }
 
 class AddProduct extends React.Component {
@@ -20,7 +20,7 @@ class AddProduct extends React.Component {
     for (let i in formData) {
       formData[i] = this[i]? this[i].value: formData[i]
     }
-    formData.member_id = JSON.parse(localStorage.getItem('user')).id
+    formData.user_id = JSON.parse(localStorage.getItem('user')).id
     new Fetch('/product', 'POST', formData)
       .then((data) => {
         console.log(data)

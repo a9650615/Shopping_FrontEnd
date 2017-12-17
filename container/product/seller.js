@@ -11,7 +11,7 @@ export default class Seller extends React.Component {
             <Avatar style={{width: 60, height: 60}} src="/static/image/default-avatar.png" />
             <div className="info">
               <div>{this.props.user.name}</div>
-              <Link href={`/user/${1}`}><a href={`/user/${1}`}><button className="shopee-button-outline ">查看賣場</button></a></Link>
+              <Link href={`/user/${this.props.user.id}`}><a href={`/user/${this.props.user.id}`}><button className="shopee-button-outline ">查看賣場</button></a></Link>
             </div>
           </div>
         </Link>

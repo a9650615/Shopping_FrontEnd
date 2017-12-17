@@ -9,7 +9,7 @@ export default class User extends React.Component {
   }
 
   componentDidMount() {
-    new Fetch(`/user/id/${this.props.id}`)
+    new Fetch(`/user/${this.props.id}`)
       .then((data) => {
         this.setState(data)
       })
