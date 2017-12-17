@@ -6,7 +6,7 @@ export default class Seller extends React.Component {
   render() {
     return (
       <div>
-        <Link href={`/user/${1}`}>
+        <Link href={`/user/${this.props.user.id}`}>
           <div className="flex">
             <Avatar style={{width: 60, height: 60}} src="/static/image/default-avatar.png" />
             <div className="info">
