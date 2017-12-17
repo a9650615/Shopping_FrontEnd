@@ -22,7 +22,7 @@ export default class Index extends React.Component {
       <div className="max_size">
         {
           this.state.product.map((value) => {
-            let image = value.content.match(pattern)
+            let image = value.content.match(pattern) || ['']
             return <Link key={value.name} href={`/product/${value.id}`}><a href={`/product/${value.id}`}><Product name={value.name} price={value.price} image={image[0].replace(`[`, ``).replace(`]`,``)} /></a></Link>
           })
         }

@@ -6,6 +6,6 @@ routes
 .add('product')
 .add('/seller/:id', 'seller')
 .add('/product/:id', 'product')
-.add('/user/:id', 'user')
+.add('user', '/user/:id', 'user')
 // .add('blog', '/blog/:slug')
 // .add('user', '/user/:id', 'profile')

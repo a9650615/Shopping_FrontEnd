@@ -14,11 +14,12 @@ class Index extends React.Component {
     name: '',
     price: 0,
     user_ID: 0,
-    user: {}
+    user: {},
+    select: 1
   }
 
   componentDidMount() {
-    new Fetch(`/product/${this.props.id}`)
+    new Fetch(`/product/id/${this.props.id}`)
       .then((data) => {
         this.setState(data.product)
         new Fetch(`/user/id/${data.product.user_ID}`)
@@ -27,6 +28,34 @@ class Index extends React.Component {
               user: data
             })
           })
+      })
+  }
+
+  add = () => {
+    let select = this.state.select
+    this.setState({
+      select: select < this.state.amount? select+1: select
+    })
+  }
+
+  cut = () => {
+    let select = this.state.select
+    this.setState({
+      select: select > 1? select-1: select
+    })
+  }
+
+  addCart() {
+    let user = JSON.parse(localStorage.getItem('user'))
+    if (user.id && this.state.id)
+      new Fetch(`/shopping_cart`, 'POST', {
+        user_id: user.id,
+        product_id: this.state.id,
+        price: this.state.price,
+        amount: this.state.amount
+      })
+      .then((data) => {
+        console.log(data)
       })
   }
 
@@ -52,15 +81,19 @@ class Index extends React.Component {
               <div className="product-selecter">
                 <div className="num-info">數量：</div>
                 <div className="selecter">
-                  <button className="shopee-button-outline"><svg enableBackground="new 0 0 10 10" viewBox="0 0 10 10" x="0" y="0"><polygon points="4.5 4.5 3.5 4.5 0 4.5 0 5.5 3.5 5.5 4.5 5.5 10 5.5 10 4.5"></polygon></svg></button>
-                  <input type="text" className="shopee-button-outline shopee-button-outline-mid" value="1" readOnly />
-                  <button className="shopee-button-outline"><svg enableBackground="new 0 0 10 10" viewBox="0 0 10 10" x="0" y="0"><polygon points="10 4.5 5.5 4.5 5.5 0 4.5 0 4.5 4.5 0 4.5 0 5.5 4.5 5.5 4.5 10 5.5 10 5.5 5.5 10 5.5"></polygon></svg></button>
+                  <button onClick={this.cut} className="shopee-button-outline"><svg enableBackground="new 0 0 10 10" viewBox="0 0 10 10" x="0" y="0"><polygon points="4.5 4.5 3.5 4.5 0 4.5 0 5.5 3.5 5.5 4.5 5.5 10 5.5 10 4.5"></polygon></svg></button>
+                  <input type="text" className="shopee-button-outline shopee-button-outline-mid" value={this.state.select} readOnly />
+                  <button onClick={this.add} className="shopee-button-outline"><svg enableBackground="new 0 0 10 10" viewBox="0 0 10 10" x="0" y="0"><polygon points="10 4.5 5.5 4.5 5.5 0 4.5 0 4.5 4.5 0 4.5 0 5.5 4.5 5.5 4.5 10 5.5 10 5.5 5.5 10 5.5"></polygon></svg></button>
                 </div>
                 <span className="num-info">還剩{this.state.amount}件</span>
               </div>
+              <button className="shopee-button-solid shopee-button-solid--complement btn-add-to-cart">
+                <i className="material-icons icon">add_shopping_cart</i>
+                <span onClick={this.addCart.bind(this)} className="shopee-product-info__footer__button-text">加入購物車</span>
+              </button>
             </div>
             <div className="shopee-guarantee">
-              <span className="guard">蝦皮承諾</span>
+              <span className="guard">熊讚承諾</span>
               <span className="">蝦皮購物保障你的交易安全：我們只會在買家確認收到商品後，才會撥款給賣家！</span>
             </div>
           </Grid>
@@ -84,6 +117,48 @@ class Index extends React.Component {
           </div>
         </div>
         <style>{`
+        .btn-add-to-cart {
+          margin: 10px;
+        }
+        .shopee-button-solid:hover {
+          background: #00a08a;
+        }
+        .shopee-button-solid {
+            padding: 0 12px;
+            padding: 0 1.2rem;
+            height: 44px;
+            height: 4.4rem;
+            font-weight: 400;
+            text-transform: capitalize;
+            font-size: 14px;
+            font-size: 1.4rem;
+            color: #fff;
+            margin-right: 10px;
+            margin-right: 1rem;
+            box-sizing: border-box;
+        }
+        .shopee-product-info__footer__button-text {
+          vertical-align: top;
+          padding: 15px;
+          line-height: 30px;
+        }
+        .shopee-button-solid {
+            padding: 0 12px;
+            padding: 0 1.2rem;
+            height: 44px;
+            height: 3.4rem;
+            font-weight: 400;
+            text-transform: capitalize;
+            font-size: 14px;
+            font-size: 0.8rem;
+            color: #fff;
+            margin-right: 10px;
+            margin-right: 1rem;
+            box-sizing: border-box;
+            background: #00bfa5;
+            border: none;
+            cursor: pointer;
+        }
           .product-info {
             padding: 10px;
           }

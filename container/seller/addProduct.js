@@ -8,7 +8,7 @@ import Router from 'next/router'
 let formData = {
   price: 0,
   amount: 0,
-  product_name: '',
+  name: '',
   content: '',
   is_discount: 0,
   member_id: 0
@@ -43,7 +43,7 @@ class AddProduct extends React.Component {
                 <div className="label">商品名稱</div>
               </Grid>
               <Grid xs={12} sm={8} item>
-                <input type="text" placeholder="" ref={(input) => this.product_name = input} className="ember-text-field" />
+                <input type="text" placeholder="" ref={(input) => this.name = input} className="ember-text-field" />
               </Grid>
             </Grid>
             <Grid container>

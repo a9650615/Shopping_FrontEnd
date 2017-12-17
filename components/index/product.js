@@ -49,6 +49,7 @@ export default class Product extends React.Component {
             z-index: 2;
             background: #fff;
             position: relative;
+            color: black;
           }
           .image-wrapper {
             background-position: 50%;

@@ -20,7 +20,7 @@ class Counter extends React.Component {
 
   render () {
     let page
-    switch(this.props.url.query.page) {
+    switch(this.props.url.query.id) {
       case 'addproduct': 
         page = <AddProduct />;
         break;

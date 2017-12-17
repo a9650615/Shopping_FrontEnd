@@ -11,7 +11,7 @@ import Router from 'next/router'
 
 let text = [
   {},
-  {title: '註冊', url: '/user/', data: {
+  {title: '註冊', url: '/user/register', data: {
     name: '',
     account: '',
     password: '',
