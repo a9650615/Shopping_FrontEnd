@@ -1,11 +1,13 @@
 import {Component} from 'react'
 import Grid from 'material-ui/Grid'
 import Avatar from 'material-ui/Avatar'
+import Fetch from '../../model/fetch'
 
 class Comment extends Component {
   state = { 
     comment: '',
-    clear: false
+    clear: false,
+    commentList: []
   }
 
   handleCommentChange = (eve) => {
@@ -15,15 +17,19 @@ class Comment extends Component {
   }
 
   handleCommentFocus = () => {
-    console.log('focus')
     this.setState({
       clear: true,
       comment: ''
     })
   }
 
-  componentWillReceiveProps(prop) {
-    console.log(prop)
+  componentWillMount() {
+    new Fetch(`/comment/product/${this.props.id}`, 'GET')
+      .then((val) => {
+        this.setState({
+          commentList: val.msg
+        })
+      })
   }
 
   render() {
@@ -37,13 +43,19 @@ class Comment extends Component {
           />
           </Grid>
           <Grid item xs={11}>
-          <div className="comment-item">
-            <a className="comment-user">test</a>
-            <div className="comment-content">
-              <span> 10年是9代嗎？如果大燈原廠hid 就是只能改霧燈</span>
-            </div>
-            <div className="comment-time">{new Date().toLocaleDateString()}</div>
-          </div>
+          {
+            this.state.commentList.map((val) => {
+              return (
+                <div className="comment-item">
+                  <a className="comment-user">{val.userList.name}</a>
+                  <div className="comment-content">
+                    <span>{val.content}</span>
+                  </div>
+                  <div className="comment-time">{new Date(val.updatedAt).toLocaleDateString()}</div>
+                </div>
+              )
+            })
+          }
           </Grid>
         </Grid>
         <div className="comment-box__edit" suppressContentEditableWarning contentEditable onFocus={this.handleCommentFocus} onInput={this.handleCommentChange}>
