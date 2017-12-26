@@ -14,7 +14,7 @@ class Index extends React.Component {
     id: 0,
     name: '',
     price: 0,
-    user_ID: 0,
+    user_id: 0,
     user: {},
     select: 1,
     img: [],
