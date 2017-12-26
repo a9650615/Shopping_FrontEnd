@@ -24,12 +24,14 @@ export default () => (
       <Grid item sm={2}>
         <div className="shopping_cart-wrapper">
           <span className="flex">
-            <IconButton style={{
-                width: 45,
-                height: 45
-              }}>
-                <span className="material-icons icon">shopping_cart</span>
-            </IconButton>
+            <Link href="/cart">
+              <IconButton style={{
+                  width: 45,
+                  height: 45
+                }}>
+                  <span className="material-icons icon">shopping_cart</span>
+              </IconButton>
+            </Link>
           </span>
         </div>
       </Grid>

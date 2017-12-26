@@ -23,7 +23,7 @@ export default class Index extends React.Component {
         {
           this.state.product.map((value) => {
             let image = value.content.match(pattern) || ['']
-            return <Link key={value.name} href={`/product/${value.id}`}><a href={`/product/${value.id}`}><Product name={value.name} price={value.price} image={image[0].replace(`[`, ``).replace(`]`,``)} /></a></Link>
+            return <Link key={value.name+value.id} href={`/product/${value.id}`}><a href={`/product/${value.id}`}><Product name={value.name} price={value.price} image={image[0].replace(`[`, ``).replace(`]`,``)} /></a></Link>
           })
         }
       </div>
