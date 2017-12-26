@@ -3,6 +3,7 @@ import Grid from 'material-ui/Grid'
 import Seller from './seller'
 import Tabs, { Tab } from 'material-ui/Tabs'
 import Fetch from '../../model/fetch'
+import Comment from '../../components/product/comment'
 
 let pattern = new RegExp(/\[(.*)\]/,'ig')
 
@@ -16,7 +17,8 @@ class Index extends React.Component {
     user_ID: 0,
     user: {},
     select: 1,
-    img: []
+    img: [],
+    tabShow: 0
   }
 
   getImgUrl(str = '') {
@@ -69,6 +71,16 @@ class Index extends React.Component {
       })
   }
 
+  handleTab = (eve, val) => {
+    this.setState({
+      tabShow: val
+    })
+  }
+
+  showComments = () => {
+    return (<Comment id={this.state.id}/>)
+  }
+
   render() {
     return (
       <div className="max_size">
@@ -116,17 +128,20 @@ class Index extends React.Component {
           <Tabs
             indicatorColor="#ff5722"
             textColor="#ff5722"
-            value={0}
+            value={this.state.tabShow}
+            onChange={this.handleTab}
           >
             <Tab label="商品詳情"></Tab>
             <Tab label="商品評價"></Tab>
             <Tab label="商品留言"></Tab>
           </Tabs>
           <div className="product-info">
-            {this.state.content.replace(pattern, '')}
+            {this.state.tabShow == 0&& <div>{this.state.content.replace(pattern, '')}</div>}
+            {this.state.tabShow == 1&& <div>評分</div>}
+            {this.state.tabShow == 2&& <div>{this.showComments()}</div>}
           </div>
         </div>
-        <style>{`
+        <style jsx>{`
         .btn-add-to-cart {
           margin: 10px;
         }
