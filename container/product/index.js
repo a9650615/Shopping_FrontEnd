@@ -29,10 +29,10 @@ class Index extends React.Component {
     new Fetch(`/product/id/${this.props.id}`)
       .then((data) => {
         data.product.img = []
+        if (data.product.content.match(pattern))
         data.product.content.match(pattern).forEach((val) => {
           data.product.img.push(this.getImgUrl(val))
         })
-        console.log(data.product)
         this.setState(data.product)
         new Fetch(`/user/${data.product.user_id}`)
           .then((data) => {
@@ -82,6 +82,7 @@ class Index extends React.Component {
   }
 
   render() {
+    console.log(this.state)
     return (
       <div className="max_size">
         <Grid container>
