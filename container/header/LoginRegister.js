@@ -31,7 +31,8 @@ class LoginRegister extends React.Component {
   componentWillMount() {
     if (typeof localStorage != 'undefined') {
       let user = JSON.parse(localStorage.getItem('user'))
-      this.props.user.SaveUser(user)
+      if (user)
+        this.props.user.SaveUser(user)
     }
   }
 
