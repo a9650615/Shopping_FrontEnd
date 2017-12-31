@@ -57,7 +57,7 @@ class SearchBar extends Component {
           <Grid item sm={2}>
             <div className="shopping_cart-wrapper">
               <span className="flex">
-                <Link href="/cart">
+                <Link route="/cart">
                   <IconButton style={{
                       width: 45,
                       height: 45
