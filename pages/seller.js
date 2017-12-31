@@ -5,6 +5,7 @@ import withRedux from 'next-redux-wrapper'
 import Wrapper from '../components/seller/wrapper'
 import Index from '../container/seller'
 import AddProduct from '../container/seller/addProduct'
+import MyProduct from '../container/seller/myProduct'
 
 class Counter extends React.Component {
   static getInitialProps ({ query, store, isServer }) {
@@ -20,9 +21,15 @@ class Counter extends React.Component {
 
   render () {
     let page
-    switch(this.props.url.query.id) {
+    switch(this.props.url.query.type) {
       case 'addproduct': 
         page = <AddProduct />;
+        break;
+      case 'product':
+        page = <MyProduct />;
+        break;
+      case 'editproduct':
+        page = <AddProduct prod_id={this.props.url.query.id} />;
         break;
       default:
         page = (<Index />)

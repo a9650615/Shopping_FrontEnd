@@ -3,7 +3,8 @@ import Paper from 'material-ui/Paper'
 import Typography from 'material-ui/Typography'
 import Grid from 'material-ui/Grid'
 import Fetch from '../../model/fetch'
-import Router from 'next/router'
+// import Router from 'next/router'
+import {Router} from '../../router'
 
 let formData = {
   price: 0,
@@ -16,21 +17,43 @@ let formData = {
 
 class AddProduct extends React.Component {
 
+  componentDidMount() {
+    if (this.props.prod_id) {
+      new Fetch(`/product/id/${this.props.prod_id}`)
+        .then((val) => {
+          console.log(val)
+          let product = val.product
+          for (let i in formData) {
+            if (this[i])
+              this[i].value = product[i]
+          }
+        })
+    }
+  }
+
   sendData() {
     for (let i in formData) {
       formData[i] = this[i]? this[i].value: formData[i]
     }
     formData.user_id = JSON.parse(localStorage.getItem('user')).id
-    new Fetch('/product', 'POST', formData)
-      .then((data) => {
-        console.log(data)
-      })
+    if (!this.props.prod_id) {
+      new Fetch('/product', 'POST', formData)
+        .then((data) => {
+          console.log(data)
+        })
+    } else {
+      new Fetch(`/product/${this.props.prod_id}`, 'PUT', formData)
+        .then((data) => {
+          console.log(data)
+        })
+    }
   }
 
   cancel() {
-    Router.push({
-      pathname: '/seller'
-    })
+    if (!this.props.prod_id)
+      Router.pushRoute('/seller')
+    else
+      Router.pushRoute('/seller/product')
   }
   render() {
     return (
@@ -74,7 +97,7 @@ class AddProduct extends React.Component {
             <Grid container>
               <Grid xs={12} sm={4} item>
                 <div style={{display: 'flex'}}>
-                  <button className="button-solid solid--primary" onClick={this.sendData.bind(this)}>新增</button>
+                  <button className="button-solid solid--primary" onClick={this.sendData.bind(this)}>{this.props.prod_id?'更新':'新增'}</button>
                   <button className="cancel-btn" style={{border: 'solid #ccc 1px', margin: '0 0 0 5px'}} onClick={this.cancel.bind(this)}>取消</button>
                 </div>
               </Grid>
