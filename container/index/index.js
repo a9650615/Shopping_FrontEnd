@@ -1,22 +1,32 @@
 import React from 'react'
+import {connect} from 'react-redux'
 import {Link} from '../../router'
 import Product from '../../components/index/product'
 import Fetch from '../../model/fetch'
 var pattern = new RegExp(/\[(.*)\]/,'ig'); // fragment locater
 
-export default class Index extends React.Component {
+class Index extends React.Component {
   state = {
     product: []
   }
 
   componentDidMount() {
-    new Fetch('/product/all', 'GET', {})
+    this.componentWillReceiveProps(this.props)
+  }
+
+  componentWillReceiveProps(props) {
+    let url = '/product/all';
+    if (props.keyword) {
+      url = `/product/search/${props.keyword}`
+    }
+    new Fetch(url, 'GET', {})
       .then((data) => {
         this.setState({
           product: data.product
         })
       })  
   }
+
   render() {
     return (
       <div className="max_size">
@@ -30,3 +40,11 @@ export default class Index extends React.Component {
     )
   }
 }
+
+let mapStateToProps = (state) => {
+  return {
+    keyword: state.search.keyword
+  }
+}
+
+export default connect(mapStateToProps)(Index)

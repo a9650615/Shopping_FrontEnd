@@ -11,13 +11,17 @@ const exampleInitialState = {
     id: null,
     account: '',
     info: ''
+  },
+  search: {
+    keyword: ''
   }
 }
 
 export const actionTypes = {
   // ADD: 'ADD',
   // TICK: 'TICK',
-  USER_SAVE: 'USER_SAVE'
+  USER_SAVE: 'USER_SAVE',
+  SET_KEYWORD: 'SET_KEYWORD'
 }
 
 // REDUCERS
@@ -25,6 +29,9 @@ export const reducer = (state = exampleInitialState, action) => {
   switch (action.type) {
     case actionTypes.USER_SAVE:
       return Object.assign({}, state, {user: action.user})
+      break;
+    case actionTypes.SET_KEYWORD:
+      return Object.assign({}, state, {search: action.search})
       break;
     // case actionTypes.TICK:
     //   return Object.assign({}, state, { lastUpdate: action.ts, light: !!action.light })
