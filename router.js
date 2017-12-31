@@ -8,6 +8,6 @@ routes
 .add('/seller/:type', 'seller')
 .add('/seller/:type/:id', 'seller')
 .add('/product/:id', 'product')
-.add('user', '/user/:id', 'user')
+.add('/user/:id', 'user')
 // .add('blog', '/blog/:slug')
 // .add('user', '/user/:id', 'profile')

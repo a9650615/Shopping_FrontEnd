@@ -1,7 +1,7 @@
 import {Component} from 'react'
 import {connect} from 'react-redux'
 import Fetch from '../../model/fetch'
-import Product from "../../components/index/product";
+import Product from "../../components/index/product"
 import {Link} from '../../router'
 let pattern = new RegExp(/\[(.*)\]/,'ig');
 

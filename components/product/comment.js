@@ -2,6 +2,7 @@ import {Component} from 'react'
 import Grid from 'material-ui/Grid'
 import Avatar from 'material-ui/Avatar'
 import Fetch from '../../model/fetch'
+import {Link} from '../../router'
 
 class Comment extends Component {
   state = { 
@@ -52,14 +53,16 @@ class Comment extends Component {
               return (
               <Grid container>
                 <Grid item xs={1}>
-                  <Avatar
-                    alt=""
-                    src="/static/image/default-avatar.png"
-                  />
+                  <Link route={`/user/${val.userList.id}`}>
+                    <Avatar
+                      alt=""
+                      src="/static/image/default-avatar.png"
+                    />
+                  </Link>
                 </Grid>
                 <Grid item xs={11}>
                   <div className="comment-item">
-                    <a className="comment-user">{val.userList.name}</a>
+                    <Link route={`/user/${val.userList.id}`}><a className="comment-user">{val.userList.name}</a></Link>
                     <div className="comment-content">
                       <span>{val.content}</span>
                     </div>

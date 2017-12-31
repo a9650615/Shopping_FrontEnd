@@ -1,17 +1,17 @@
 import React from 'react'
 import Avatar from 'material-ui/Avatar'
-import Link from 'next/link'
+import {Link} from '../../router'
 
 export default class Seller extends React.Component {
   render() {
     return (
       <div>
-        <Link href={`/user/${this.props.user.id}`}>
+        <Link route={`/user/${this.props.user.id}`}>
           <div className="flex">
             <Avatar style={{width: 60, height: 60}} src="/static/image/default-avatar.png" />
             <div className="info">
               <div>{this.props.user.name}</div>
-              <Link href={`/user/${this.props.user.id}`}><a href={`/user/${this.props.user.id}`}><button className="shopee-button-outline ">查看賣場</button></a></Link>
+              <Link route={`/user/${this.props.user.id}`}><a><button className="shopee-button-outline ">查看賣場</button></a></Link>
             </div>
           </div>
         </Link>
