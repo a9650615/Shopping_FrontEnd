@@ -1,17 +1,15 @@
-import Link from  'next/link'
+import {Link} from  '../../router'
 import Grid from 'material-ui/Grid'
 import LoginRegister from '../../container/header/LoginRegister'
 
 export default () => (
   <Grid container spacing={12} className="max_size">
     <Grid item sm={6}>
-      <Link href="/seller">
+      <Link route="/seller">
         <a className="topbar_nav_a">賣家中心</a>
       </Link>
       <span className="splits_separator"></span>
-      <Link>
-        <a href="https://www.facebook.com/BGshopping2017/" className="topbar_nav_a">追蹤我們</a>
-      </Link>
+      <a href="https://www.facebook.com/BGshopping2017/" className="topbar_nav_a">追蹤我們</a>
     </Grid>
     {/* ---- Right Side ---- */}
     <Grid item sm={6}>
