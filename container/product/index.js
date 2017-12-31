@@ -18,7 +18,8 @@ class Index extends React.Component {
     user: {},
     select: 1,
     img: [],
-    tabShow: 0
+    tabShow: 0,
+    mainImg: null
   }
 
   getImgUrl(str = '') {
@@ -81,19 +82,28 @@ class Index extends React.Component {
     return (<Comment id={this.state.id} user_id={this.state.user_id}/>)
   }
 
+  changeViewImage = (val) => {
+    this.setState({
+      mainImg: val
+    })
+  }
+
   render() {
-    console.log(this.state)
     return (
       <div className="max_size">
         <Grid container>
           <Grid item xs={12} sm={4}>
             <div className="image-container">
-              <img src={this.state.img[0]} alt=""/>
+              <img src={this.state.mainImg||this.state.img[0]} alt=""/>
             </div>
             <div className="image-list">
-              <img src={`https://cfshopeetw-a.akamaihd.net/file/6f4b0ac9489b4e75c4c948052bcfcc6a_tn`} alt=""/>
-              <img src={`https://cfshopeetw-a.akamaihd.net/file/6f4b0ac9489b4e75c4c948052bcfcc6a_tn`} alt=""/>
-              <img src={`https://cfshopeetw-a.akamaihd.net/file/6f4b0ac9489b4e75c4c948052bcfcc6a_tn`} alt=""/>
+              {
+                this.state.img.map((val) => {
+                  return (
+                    <img key={val} src={val} alt="" onMouseOver={this.changeViewImage.bind(this, val)}/>
+                  )
+                })
+              }
             </div>
           </Grid>
           <Grid item xs={12} sm={8}>
@@ -274,6 +284,8 @@ class Index extends React.Component {
             height: auto;
             max-width: 100%;
             max-height: 100%;
+          }
+          .image-list {
           }
           .image-list img {
             width: 70px;
