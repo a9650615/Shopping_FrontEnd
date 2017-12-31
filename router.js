@@ -1,6 +1,7 @@
 const routes = module.exports = require('next-routes')()
 
 routes
+.add('cart')
 .add('index')
 .add('/search/:keyword', 'index')
 .add('seller')
