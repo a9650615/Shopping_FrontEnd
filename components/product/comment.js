@@ -32,32 +32,44 @@ class Comment extends Component {
       })
   }
 
+  submitComment = () => {
+    new Fetch(`/comment`, 'POST',
+      {
+        product_id: this.props.id,
+        content: this.state.comment,
+        user_id: this.props.user_id
+      })
+      .then((val) => {
+        this.componentWillMount();
+      })
+  }
+
   render() {
     return (
       <div className="comment-item">
-        <Grid container>
-          <Grid item xs={1}>
-          <Avatar
-            alt=""
-            src="/static/image/default-avatar.png"
-          />
-          </Grid>
-          <Grid item xs={11}>
           {
             this.state.commentList.map((val) => {
               return (
-                <div className="comment-item">
-                  <a className="comment-user">{val.userList.name}</a>
-                  <div className="comment-content">
-                    <span>{val.content}</span>
+              <Grid container>
+                <Grid item xs={1}>
+                  <Avatar
+                    alt=""
+                    src="/static/image/default-avatar.png"
+                  />
+                </Grid>
+                <Grid item xs={11}>
+                  <div className="comment-item">
+                    <a className="comment-user">{val.userList.name}</a>
+                    <div className="comment-content">
+                      <span>{val.content}</span>
+                    </div>
+                    <div className="comment-time">{new Date(val.updatedAt).toLocaleDateString()}</div>
                   </div>
-                  <div className="comment-time">{new Date(val.updatedAt).toLocaleDateString()}</div>
-                </div>
+                </Grid>
+              </Grid>
               )
             })
           }
-          </Grid>
-        </Grid>
         <div className="comment-box__edit" suppressContentEditableWarning contentEditable onFocus={this.handleCommentFocus} onInput={this.handleCommentChange}>
           {
             this.state.clear == false &&
@@ -65,7 +77,7 @@ class Comment extends Component {
           }
         </div>
         <div>
-          <button className="button-solid solid--primary">送出</button>
+          <button onClick={this.submitComment} className="button-solid solid--primary">送出</button>
         </div>
         <style jsx>{`
           .button-solid {

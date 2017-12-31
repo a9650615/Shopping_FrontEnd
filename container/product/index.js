@@ -78,7 +78,7 @@ class Index extends React.Component {
   }
 
   showComments = () => {
-    return (<Comment id={this.state.id}/>)
+    return (<Comment id={this.state.id} user_id={this.state.user_id}/>)
   }
 
   render() {
