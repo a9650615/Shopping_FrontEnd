@@ -65,7 +65,7 @@ class Index extends React.Component {
         user_id: user.id,
         product_id: this.state.id,
         price: this.state.price,
-        amount: this.state.amount
+        amount: this.state.select
       })
       .then((data) => {
         console.log(data)
