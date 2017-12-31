@@ -9,8 +9,8 @@ export default () => (
         <a className="topbar_nav_a">賣家中心</a>
       </Link>
       <span className="splits_separator"></span>
-      <Link href="#">
-        <a className="topbar_nav_a">追蹤我們</a>
+      <Link>
+        <a href="https://www.facebook.com/BGshopping2017/" className="topbar_nav_a">追蹤我們</a>
       </Link>
     </Grid>
     {/* ---- Right Side ---- */}
