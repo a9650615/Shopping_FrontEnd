@@ -4,11 +4,13 @@ import Fetch from '../../model/fetch'
 import Table, { TableBody, TableCell, TableHead, TableRow } from 'material-ui/Table'
 import List from '../../components/cart/list'
 import Button from 'material-ui/Button'
+import Paper from 'material-ui/Paper'
 
 class Cart extends Component {
   state = {
     total: 0,
-    list: []
+    list: [],
+    orders: []
   }
 
   componentDidMount = () => {
@@ -21,6 +23,22 @@ class Cart extends Component {
         this.setState({
           list: val.msg,
           total
+        })
+      })
+    let allOrders = []
+    new Fetch(`/order/user/${this.props.user_id}`, 'GET')
+      .then(async (val) => {
+        allOrders = val.data
+        await allOrders.forEach(async (val, i) => {
+          await new Fetch(`/order/${val.id}`)
+            .then((val) => {
+              allOrders[i].detail = val.data
+              if (i == allOrders.length-1){
+                this.setState({
+                  orders: allOrders
+                })
+              }
+            })
         })
       })
   }
@@ -74,6 +92,41 @@ class Cart extends Component {
             <button className="button-solid solid--primary" onClick={this.sendToOrder}>結帳</button>
           }
         </div>
+        <h3>
+          已定訂單
+        </h3>
+        {
+          this.state.orders.map((val) => {
+            console.log(val)
+            return (
+              <Paper key={val.id} style={{marginBottom: 30}}>
+                <Table>
+                <TableHead>
+                  <TableRow>
+                    <TableCell numeric>名稱</TableCell>
+                    <TableCell numeric>價格</TableCell>
+                    <TableCell numeric>數量</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {
+                    val.detail&&
+                    val.detail.map((val, i) => {
+                      return (
+                        <TableRow key={val.id}>
+                          <TableCell>{val.name}</TableCell>
+                          <TableCell>{val.price}</TableCell>
+                          <TableCell>{val.amount}</TableCell>
+                        </TableRow>
+                      )
+                    })
+                  }
+                </TableBody>
+              </Table>
+              </Paper>
+            )
+          })
+        }
         <style>{`
           .right {
             text-align: right;
