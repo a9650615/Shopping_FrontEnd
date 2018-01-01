@@ -37,7 +37,7 @@ export default () => (
             </div>
           </a>
         </Link>
-        <Link route="/seller/mySelling">
+        {/* <Link route="/seller/mySelling">
           <a>
             <div className="buttons">
               <div className="home-big-button">
@@ -49,7 +49,7 @@ export default () => (
               <div className="home-big-button__title">我的銷售</div></div>
             </div>
           </a>
-        </Link>
+        </Link> */}
       </div>
     </div>
     <style jsx>{`
