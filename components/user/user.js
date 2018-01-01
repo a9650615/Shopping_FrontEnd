@@ -26,7 +26,7 @@ export default class User extends React.Component {
   }
   render() {
     return (
-      <div className="">
+      <div className="max_size">
         <div className="flex product-info">
           <Avatar style={{width: 60, height: 60}} src="/static/image/default-avatar.png" />
           <div className="info">
