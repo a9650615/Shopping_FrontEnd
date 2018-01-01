@@ -1,8 +1,14 @@
 export default class Fetch {
   constructor(url, method = 'GET', data = {}) {
     let form = []
-    for (let key in data) {
-      form.push(`${key}=${data[key]}`)
+    if (typeof data == 'string')
+    {
+      form = data
+    }
+    else {
+      for (let key in data) {
+        form.push(`${key}=${data[key]}`)
+      }
     }
     return fetch('//localhost:8000' + url, {
       method,
@@ -10,7 +16,7 @@ export default class Fetch {
         'Accept': 'application/json, application/xml, text/plain, text/html, *.*',
         'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8'
       },
-      body: method!='GET'?form.join('&'): null
+      body: method!='GET'?(typeof form == 'string'?form:form.join('&')): null
     })
     .then(response => {
       if (response.status === 200) {
