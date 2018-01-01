@@ -7,7 +7,7 @@ let pattern = new RegExp(/\[(.*)\]/,'ig')
 
 class List extends Component {
   deleteOrder = () => {
-    new Fetch(`/shopping_cart/${this.props.order.id}`, 'DELETE')
+    new Fetch(`/shopping_cart/id/${this.props.order.id}`, 'DELETE')
       .then((data) => {
         this.props.onDelete()
       })
