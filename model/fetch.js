@@ -10,7 +10,7 @@ export default class Fetch {
         form.push(`${key}=${data[key]}`)
       }
     }
-    return fetch('//localhost:8000' + url, {
+    return fetch('http://birdyoserv.ga:8000' + url, {
       method,
       headers: {
         'Accept': 'application/json, application/xml, text/plain, text/html, *.*',

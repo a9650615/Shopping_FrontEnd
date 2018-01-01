@@ -40,11 +40,13 @@ class AddProduct extends React.Component {
       new Fetch('/product', 'POST', formData)
         .then((data) => {
           console.log(data)
+          this.cancel()
         })
     } else {
       new Fetch(`/product/${this.props.prod_id}`, 'PUT', formData)
         .then((data) => {
           console.log(data)
+          this.cancel()
         })
     }
   }
