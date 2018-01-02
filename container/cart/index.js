@@ -116,7 +116,7 @@ class Cart extends Component {
                         <TableRow key={val.id}>
                           <TableCell>{val.name}</TableCell>
                           <TableCell>{val.price}</TableCell>
-                          <TableCell>{val.amount}</TableCell>
+                          <TableCell>{val.buy_amount}</TableCell>
                         </TableRow>
                       )
                     })
