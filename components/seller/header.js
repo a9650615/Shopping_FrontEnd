@@ -1,5 +1,5 @@
 import React from 'react'
-import Link from 'next/link'
+import {Link} from '../../router'
 import Grid from 'material-ui/Grid'
 import Typography from 'material-ui/Typography'
 import Avatar from 'material-ui/Avatar'
@@ -21,7 +21,7 @@ class Header extends React.Component {
             <Grid item sm={7}>
               <div className="title">
                 <Typography type="title" style={{color: 'white', fontWeight: '100'}}>
-                  <Link href="/seller">
+                  <Link route="/seller">
                     <a href="/seller">熊讚賣家中心</a>
                   </Link>
                 </Typography>
@@ -31,10 +31,12 @@ class Header extends React.Component {
               <Grid container justify="flex-end">
                 <Grid item style={{padding: 0}}>
                   <div className="select-item">
-                    <div className="account">
-                      <Avatar src="/static/image/default-avatar.png" style={{width: 25, height: 25, display: 'inline-block'}}/>
-                      <span className="account-name">{this.props.user.name}</span>
-                    </div>
+                    <Link route="/">
+                      <div className="account">
+                        <Avatar src="/static/image/default-avatar.png" style={{width: 25, height: 25, display: 'inline-block'}}/>
+                        <span className="account-name">{this.props.user.name}</span>
+                      </div>
+                    </Link>
                   </div>
                 </Grid>
               </Grid>

@@ -7,7 +7,7 @@ import User from '../../reducer/User'
 import { Avatar } from 'material-ui'
 import Popover from 'material-ui/Popover'
 import Menu, { MenuItem } from 'material-ui/Menu'
-import Router from 'next/router'
+import {Router} from '../../router'
 
 let text = [
   {},
@@ -69,7 +69,7 @@ class LoginRegister extends React.Component {
 
   goTo(page) {
     if (page != 'logout')
-      Router.push({pathname: page})
+      Router.push(page)
     else
     {
       localStorage.setItem('user', JSON.stringify({}))
