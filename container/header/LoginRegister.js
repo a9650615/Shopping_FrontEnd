@@ -100,6 +100,7 @@ class LoginRegister extends React.Component {
               open={this.state.menuOpen}
               anchorEl={this.over}
               onRequestClose={this.hover.bind(this, false)}
+              onClose={this.hover.bind(this, false)}
             >
               <MenuList open={this.state.menuOpen} onClose={this.hover.bind(this, false)}>
                 <MenuItem onClick={this.goTo.bind(this, '/cart')}>購買清單</MenuItem>
