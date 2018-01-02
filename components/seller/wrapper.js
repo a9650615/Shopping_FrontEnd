@@ -1,13 +1,21 @@
 import React from 'react'
 import Header from './header'
+import {connect} from 'react-redux'
+import {Router} from '../../router'
 
 class Wrapper extends React.Component {
+  componentWillMount() {
+    if (!this.props.user.id) {
+      Router.push('/')
+    }
+  }
+
   render() {
     return (
       <div className="container">
         <Header />
         <div className="cell">
-          {this.props.children}
+          {this.props.user.id && this.props.children}
         </div>
         <style jsx>{`
           .container {
@@ -30,4 +38,10 @@ class Wrapper extends React.Component {
   }
 } 
 
-export default Wrapper
+let mapStateToProps = (state) => {
+  return {
+    user: state.user
+  }
+}
+
+export default connect(mapStateToProps)(Wrapper)
