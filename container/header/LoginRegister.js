@@ -5,9 +5,10 @@ import { connect } from 'react-redux'
 import {bindActionCreators} from 'redux'
 import User from '../../reducer/User'
 import { Avatar } from 'material-ui'
-import Popover from 'material-ui/Popover'
-import Menu, { MenuItem } from 'material-ui/Menu'
+import Modal from 'material-ui/Modal'
+import Menu, { MenuItem, MenuList } from 'material-ui/Menu'
 import {Router} from '../../router'
+import Popover from 'material-ui/Popover'
 
 let text = [
   {},
@@ -62,6 +63,7 @@ class LoginRegister extends React.Component {
   }
 
   hover(state) {
+    console.log(state)
     this.setState({
       menuOpen: state
     })
@@ -94,11 +96,17 @@ class LoginRegister extends React.Component {
               <span><Avatar style={{width: 20, height: 20}} src="/static/image/default-avatar.png"/></span>
               <a className="topbar_nav_a" style={{padding: '0 2px'}}>{this.props.state.user.name}</a>
             </div>
-            <Menu open={this.state.menuOpen} anchorEl={this.over} onRequestClose={this.hover.bind(this, false)}>
-              <MenuItem onClick={this.goTo.bind(this, '/cart')}>購買清單</MenuItem>
-              <MenuItem onClick={this.goTo.bind(this, '/user')}>我的帳號</MenuItem>
-              <MenuItem onClick={this.goTo.bind(this, 'logout')}>登出</MenuItem>
-            </Menu>
+            <Popover
+              open={this.state.menuOpen}
+              anchorEl={this.over}
+              onRequestClose={this.hover.bind(this, false)}
+            >
+              <MenuList open={this.state.menuOpen} onClose={this.hover.bind(this, false)}>
+                <MenuItem onClick={this.goTo.bind(this, '/cart')}>購買清單</MenuItem>
+                <MenuItem onClick={this.goTo.bind(this, '/user')}>我的帳號</MenuItem>
+                <MenuItem onClick={this.goTo.bind(this, 'logout')}>登出</MenuItem>
+              </MenuList>
+            </Popover>
           </div>
         }
         {
